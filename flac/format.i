@@ -92,7 +92,7 @@ typedef enum {
         FLAC__STREAM_DECODER_INIT_STATUS_ALREADY_INITIALIZED
 } FLAC__StreamDecoderState;
 
-typedef struct FLAC__StreamDecoder {
+typedef struct {
         struct FLAC__StreamDecoderProtected *protected_; /* avoid the C++ keyword 'protected' */
         struct FLAC__StreamDecoderPrivate *private_; /* avoid the C++ keyword 'private' */
 } FLAC__StreamDecoder;
@@ -111,7 +111,7 @@ typedef enum {
         FLAC__STREAM_ENCODER_MEMORY_ALLOCATION_ERROR
 } FLAC__StreamEncoderState;
 
-typedef struct FLAC__StreamEncoder {
+typedef struct {
         struct FLAC__StreamEncoderProtected *protected_; /* avoid the C++ keyword 'protected' */
         struct FLAC__StreamEncoderPrivate *private_; /* avoid the C++ keyword 'private' */
 } FLAC__StreamEncoder;
@@ -131,7 +131,7 @@ typedef struct FLAC__StreamEncoder {
     $1 = entry;
 }
 
-typedef struct FLAC__StreamMetadata {
+typedef struct {
     FLAC__MetadataType type;
     FLAC__bool is_last;
     unsigned length;
@@ -148,7 +148,7 @@ typedef struct FLAC__StreamMetadata {
     } data;
 } FLAC__StreamMetadata;
 
-typedef struct FLAC__StreamMetadata_StreamInfo {
+typedef struct {
     unsigned min_blocksize, max_blocksize;
     unsigned min_framesize, max_framesize;
     unsigned sample_rate;
@@ -158,22 +158,22 @@ typedef struct FLAC__StreamMetadata_StreamInfo {
     FLAC__byte md5sum[16];
 } FLAC__StreamMetadata_StreamInfo;
 
-typedef struct FLAC__StreamMetadata_Padding {
+typedef struct {
     int dummy;
 } FLAC__StreamMetadata_Padding;
 
-typedef struct FLAC__StreamMetadata_Application {
+typedef struct {
     FLAC__byte id[4];
     FLAC__byte *data;
 } FLAC__StreamMetadata_Application;
 
-typedef struct FLAC__StreamMetadata_SeekPoint {
+typedef struct {
     FLAC__uint64 sample_number;
     FLAC__uint64 stream_offset;
     unsigned frame_samples;
 } FLAC__StreamMetadata_SeekPoint;
 
-typedef struct FLAC__StreamMetadata_SeekTable {
+typedef struct {
     unsigned num_points;
     FLAC__StreamMetadata_SeekPoint *points;
 } FLAC__StreamMetadata_SeekTable;
@@ -183,25 +183,25 @@ typedef struct FLAC__StreamMetadata_SeekTable {
     $result = PyString_FromStringAndSize((const char*)$1->entry, (int)$1->length);
 }
 
-typedef struct FLAC__StreamMetadata_VorbisComment_Entry {
+typedef struct {
     FLAC__uint32 length;
     FLAC__byte *entry;
 } FLAC__StreamMetadata_VorbisComment_Entry;
 
 
-typedef struct FLAC__StreamMetadata_VorbisComment {
+typedef struct {
     FLAC__StreamMetadata_VorbisComment_Entry vendor_string;
     FLAC__uint32 num_comments;
     %typemap(out) FLAC__StreamMetadata_VorbisComment_Entry *;
     FLAC__StreamMetadata_VorbisComment_Entry *comments;
 } FLAC__StreamMetadata_VorbisComment;
 
-typedef struct FLAC__StreamMetadata_CueSheet_Index {
+typedef struct {
     FLAC__uint64 offset;
     FLAC__byte number;
 } FLAC__StreamMetadata_CueSheet_Index;
 
-typedef struct FLAC__StreamMetadata_CueSheet_Track {
+typedef struct {
     FLAC__uint64 offset;
     FLAC__byte number;
     char isrc[13];
@@ -211,7 +211,7 @@ typedef struct FLAC__StreamMetadata_CueSheet_Track {
     FLAC__StreamMetadata_CueSheet_Index *indices;
 } FLAC__StreamMetadata_CueSheet_Track;
 
-typedef struct FLAC__StreamMetadata_CueSheet {
+typedef struct {
     char media_catalog_number[129];
     FLAC__uint64 lead_in;
     FLAC__bool is_cd;
@@ -219,11 +219,11 @@ typedef struct FLAC__StreamMetadata_CueSheet {
     FLAC__StreamMetadata_CueSheet_Track *tracks;
 } FLAC__StreamMetadata_CueSheet;
 
-typedef struct FLAC__StreamMetadata_Unknown {
+typedef struct {
     FLAC__byte *data;
 } FLAC__StreamMetadata_Unknown;
 
-typedef enum FLAC__MetadataType {
+typedef enum {
     FLAC__METADATA_TYPE_STREAMINFO = 0,
     FLAC__METADATA_TYPE_PADDING = 1,
     FLAC__METADATA_TYPE_APPLICATION = 2,
@@ -234,7 +234,7 @@ typedef enum FLAC__MetadataType {
     FLAC__METADATA_TYPE_UNDEFINED = 7
 } FLAC__MetadataType;
 
-typedef enum FLAC__Metadata_ChainStatus {
+typedef enum {
     FLAC__METADATA_CHAIN_STATUS_OK = 0,
     FLAC__METADATA_CHAIN_STATUS_ILLEGAL_INPUT,
     FLAC__METADATA_CHAIN_STATUS_ERROR_OPENING_FILE,
